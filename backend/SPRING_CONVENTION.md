@@ -79,8 +79,10 @@ public ResponseEntity<ApiResponse<UserServiceResponse>> createUser(
 
 ### Service
 
-- 클래스 레벨에 반드시 `@Transactional(readOnly = true)`를 선언한다.
+- Repository, EntityManager 등 데이터 접근 계층을 사용하는 Service에만 `@Transactional`을 선언한다.
+- 데이터 접근 계층을 사용하는 Service는 클래스 레벨에 `@Transactional(readOnly = true)`를 선언한다.
 - 데이터를 변경하는 메서드에만 `@Transactional`을 개별 선언한다.
+- 데이터 접근이 없는 Service에는 `@Transactional`을 선언하지 않는다.
 - Entity를 직접 반환하는 것은 금지한다. 반드시 Service Response DTO로 변환해서 반환한다.
 - Controller DTO(`XxxRequest`)를 파라미터로 받는 것은 금지한다. 반드시 Service DTO(`XxxServiceRequest`)를 사용한다.
 
